@@ -305,7 +305,7 @@ def fake_user_reply(payload: FakeUserReply):
 
 
 @router.post("/seed_random")
-def seed_random(count: int = 5, db: Session = Depends(get_db)):
+def seed_random(count: int = 20, db: Session = Depends(get_db)):
     """Quickly seed N random rows for demo/testing."""
     now = datetime.now(timezone.utc)
     created = {"users":0, "nodes":0, "reports":0, "messages":0}
