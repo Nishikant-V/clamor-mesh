@@ -51,3 +51,58 @@ export function updateReport(
     body: JSON.stringify(patch),
   })
 }
+
+export interface CreateReportInput {
+  msg_id?: number
+  attempt?: number
+  user_id?: number
+  origin?: number
+  path?: number[]
+  category?: number
+  people?: number
+  needs?: number
+  gps_lat?: number | null
+  gps_lon?: number | null
+  gps_accuracy?: number | null
+  location?: string | null
+  message?: string | null
+  status?: string
+  name?: string
+  phone?: string
+}
+
+function generateMsgId(): number {
+  if (typeof crypto !== 'undefined' && typeof crypto.getRandomValues === 'function') {
+    const buf = new Uint32Array(1)
+    crypto.getRandomValues(buf)
+    return buf[0] === 0 ? 1 : buf[0]
+  }
+  return Math.floor(Math.random() * 4294967294) + 1
+}
+
+export function createReport(body: CreateReportInput = {}): Promise<ApiReport> {
+  const origin = body.origin ?? 1
+  const payload = {
+    msg_id: body.msg_id ?? generateMsgId(),
+    attempt: body.attempt ?? 0,
+    user_id: body.user_id ?? 65001,
+    origin,
+    path: body.path && body.path.length > 0 ? body.path : [origin],
+    category: body.category ?? 8,
+    people: body.people ?? 1,
+    needs: body.needs ?? 0,
+    gps_lat: body.gps_lat ?? null,
+    gps_lon: body.gps_lon ?? null,
+    gps_accuracy: body.gps_accuracy ?? null,
+    location: body.location ?? '',
+    message: body.message ?? '',
+    status: body.status ?? 'received',
+    name: body.name ?? '',
+    phone: body.phone ?? '',
+  }
+
+  return request('/api/reports', {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  })
+}

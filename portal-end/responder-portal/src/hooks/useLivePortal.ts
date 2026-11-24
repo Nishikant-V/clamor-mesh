@@ -120,5 +120,5 @@ export function useLivePortal() {
     }
   }, [refresh])
 
-  return { incidents, nodes, loading, error, link, acknowledge, resolveReports }
+  return { incidents, nodes, loading, error, link, acknowledge, resolveReports, refresh }
 }

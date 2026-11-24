@@ -20,7 +20,7 @@ import { formatArrival, orderByLocation } from './utils/streetRoute'
 import './App.css'
 
 function App() {
-  const { incidents, nodes, loading, error, link, acknowledge, resolveReports } = useLivePortal()
+  const { incidents, nodes, loading, error, link, acknowledge, resolveReports, refresh } = useLivePortal()
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [selectedFilters, setSelectedFilters] = useState<AiResponder[]>([])
   const [view, setView] = useState<AppView>('home')
@@ -411,7 +411,7 @@ function App() {
       <div className="agent-stage" inert={agentMode ? true : undefined}>
       <NavRail view={view} unreadCount={unreadTotal} onChange={changeView} />
       <div className="dashboard">
-        <Header nodes={nodes} link={link} />
+        <Header nodes={nodes} link={link} onSosCreated={() => void refresh(true)} />
         <main className={`dashboard-content ${view === 'messages' ? 'messages-mode' : ''}`}>
           {view === 'home' ? (
             <div className="workspace">

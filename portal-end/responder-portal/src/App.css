@@ -13,7 +13,18 @@
 .portal-brand h1 { font-size: 1.75rem; letter-spacing: -.075em; line-height: 1; }
 .portal-brand h1 span { color: var(--red); }
 .portal-name { font-size: .85rem; font-weight: 600; color: var(--muted); }
-.header-status { gap: 12px; font-size: .8rem; }
+.header-status { gap: 12px; font-size: .8rem; flex-wrap: wrap; }
+.header-status .dispatch-send { margin: 0; padding: 0 14px; }
+.sos-feedback {
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: .75rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.sos-feedback.loading { background: rgba(224, 189, 105, 0.16); color: #e0bd69; }
+.sos-feedback.success { background: rgba(46, 160, 67, 0.18); color: #7ee787; }
+.sos-feedback.error { background: rgba(217, 68, 68, 0.2); color: #ff9b9b; }
 .node-status { gap: 7px; color: var(--muted); font-weight: 550; }
 .node-status .status-dot { background: var(--red); }
 .node-status.up .status-dot { background: var(--green); }
