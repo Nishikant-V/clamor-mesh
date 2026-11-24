@@ -11,9 +11,7 @@ export default function Header({ nodes, link = 'live' }: { nodes: NetworkNode[];
   return (
     <header className="portal-header">
       <div className="portal-brand">
-        <h1>
-          net<span>0</span>
-        </h1>
+        <h1>sos help</h1>
         <span className="portal-name">Responder Center</span>
       </div>
       <div className="header-status">
@@ -27,6 +25,7 @@ export default function Header({ nodes, link = 'live' }: { nodes: NetworkNode[];
           <span className="status-dot" aria-hidden />
           {label}
         </span>
+<button className=\"dispatch-send\" type=\"button\" title=\"Call SOS\" onClick={() => alert('SOS activated')}>SOS</button>
       </div>
     </header>
   )
